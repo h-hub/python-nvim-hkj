@@ -50,6 +50,15 @@ local function get_workspace()
 	return workspace_dir
 end
 
+local function get_java_path()
+	-- Get the home directory of your operating system
+	local home = os.getenv("HOME")
+	-- Declare a directory where you would like to store project information
+	local java_path = home .. "/.sdkman/candidates/java/21.0.6-amzn/bin/java"
+
+	return java_path
+end
+
 local function java_keymaps()
 	-- Allow yourself to run JdtCompile as a Vim command
 	vim.cmd(
@@ -158,7 +167,7 @@ local function setup_jdtls()
 
 	-- Set the command that starts the JDTLS language server jar
 	local cmd = {
-		"java",
+		get_java_path(),
 		"-Declipse.application=org.eclipse.jdt.ls.core.id1",
 		"-Dosgi.bundles.defaultStartLevel=4",
 		"-Declipse.product=org.eclipse.jdt.ls.core.product",

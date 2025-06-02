@@ -46,7 +46,9 @@ return {
 				capabilities = capabilities,
 			})
 
-			require("lspconfig").kotlin_language_server.setup({})
+			lspconfig.kotlin_language_server.setup({
+				capabilities = capabilities,
+			})
 
 			-- Set vim motion for <Space> + c + h to show code documentation about the code the cursor is currently over if available
 			vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "[C]ode [H]over Documentation" })
