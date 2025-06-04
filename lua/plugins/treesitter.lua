@@ -27,6 +27,7 @@ return {
 				"markdown",
 				"markdown_inline",
 				"gitignore",
+				"kotlin",
 			},
 			-- make sure highlighting it anabled
 			highlight = { enable = true },
