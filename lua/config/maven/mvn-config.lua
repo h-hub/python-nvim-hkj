@@ -60,6 +60,10 @@ local function run_maven_command()
 			direction = "float",
 			close_on_exit = false,
 			hidden = true,
+			start_in_insert = true,
+			float_opts = {
+				border = "double",
+			},
 		})
 
 		term:toggle()
