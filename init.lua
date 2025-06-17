@@ -37,7 +37,6 @@ require("config.keymaps")
 -- Load the auto commands from the config/autocmds.lua file
 require("config.autocmds")
 
-require("config.maven.mvn-config")
 -- Setup lazy, this should always be last
 -- Tell lazy that all plugin specs are found in the plugins directory
 -- Pass it the options we specified above

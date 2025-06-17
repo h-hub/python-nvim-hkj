@@ -17,7 +17,6 @@ return {
 				"vim",
 				"vimdoc",
 				"lua",
-				"java",
 				"javascript",
 				"typescript",
 				"html",
@@ -27,7 +26,6 @@ return {
 				"markdown",
 				"markdown_inline",
 				"gitignore",
-				"kotlin",
 			},
 			-- make sure highlighting it anabled
 			highlight = { enable = true },
