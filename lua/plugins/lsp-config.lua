@@ -29,7 +29,11 @@ return {
 				capabilities = capabilities,
 			})
 
-			lspconfig.ts_ls.setup({})
+			lspconfig.ts_ls.setup({
+				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+				root_dir = require("lspconfig").util.root_pattern("package.json", "tsconfig.json", ".git"),
+				capabilities = capabilities,
+			})
 			lspconfig.html.setup({})
 			lspconfig.cssls.setup({})
 			lspconfig.emmet_ls.setup({})
