@@ -2,8 +2,21 @@ return {
 	"nvimtools/none-ls.nvim",
 	dependencies = {
 		"nvimtools/none-ls-extras.nvim",
+		"williamboman/mason.nvim",
+		"jay-babu/mason-null-ls.nvim",
 	},
 	config = function()
+		require("mason").setup()
+		require("mason-null-ls").setup({
+			ensure_installed = {
+				"black",
+				"flake8",
+				"isort",
+				"mypy",
+			},
+			automatic_installation = true,
+		})
+
 		-- get access to the none-ls functions
 		local null_ls = require("null-ls")
 
@@ -11,27 +24,14 @@ return {
 
 		-- run the setup function for none-ls to setup our different formatters
 		null_ls.setup({
-			sources = {
-				-- setup lua formatter
-				null_ls.builtins.formatting.stylua,
-				-- setup eslint linter for javascript
-				require("none-ls.diagnostics.eslint_d"),
-				-- setup prettier to format languages that are not lua
 
-				null_ls.builtins.formatting.prettier.with({
-					filetypes = {
-						"javascript",
-						"javascriptreact",
-						"typescript",
-						"typescriptreact",
-						"css",
-						"scss",
-						"html",
-						"json",
-						"yaml",
-						"markdown",
-					},
-				}),
+			sources = {
+				-- Formatters
+				null_ls.builtins.formatting.black,
+				null_ls.builtins.formatting.isort,
+
+				null_ls.builtins.diagnostics.flake8,
+				null_ls.builtins.diagnostics.mypy,
 			},
 			-- Format on save
 			on_attach = function(client, bufnr)

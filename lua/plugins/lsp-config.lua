@@ -12,7 +12,7 @@ return {
 		config = function()
 			-- ensure that we have lua language server, typescript launguage server, java language server, and java test language server are installed
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "ts_ls", "html", "cssls", "emmet_ls" },
+				ensure_installed = { "pyright" },
 			})
 		end,
 	},
@@ -29,14 +29,9 @@ return {
 				capabilities = capabilities,
 			})
 
-			lspconfig.ts_ls.setup({
-				filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-				root_dir = require("lspconfig").util.root_pattern("package.json", "tsconfig.json", ".git"),
+			lspconfig.pyright.setup({
 				capabilities = capabilities,
 			})
-			lspconfig.html.setup({})
-			lspconfig.cssls.setup({})
-			lspconfig.emmet_ls.setup({})
 
 			-- Set vim motion for <Space> + c + h to show code documentation about the code the cursor is currently over if available
 			vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "[C]ode [H]over Documentation" })
