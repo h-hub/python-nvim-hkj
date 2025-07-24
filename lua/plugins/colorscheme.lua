@@ -1,11 +1,11 @@
 return {
 	{
-		"nyoom-engineering/oxocarbon.nvim",
+		"ellisonleao/gruvbox.nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.opt.background = "dark" -- set this to dark or light
-			vim.cmd.colorscheme("oxocarbon")
+			vim.o.background = "dark" -- or "light" for light mode
+			vim.cmd([[colorscheme gruvbox]])
 		end,
 	},
 }

@@ -15,6 +15,7 @@ return {
 						"%.git/",
 						"dist",
 						"build",
+						"venv",
 					},
 				},
 			})

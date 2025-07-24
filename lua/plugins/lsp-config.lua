@@ -22,6 +22,15 @@ return {
 			-- get access to the lspconfig plugins functions
 			local lspconfig = require("lspconfig")
 
+			local util = require("lspconfig.util")
+
+			-- Automatically detect the project root
+			local root_dir =
+				util.root_pattern("pyproject.toml", "setup.py", "requirements.txt", ".git")(vim.fn.getcwd())
+
+			-- Construct the Python path assuming a virtual environment named 'venv' in the root
+			local python_path = root_dir and (root_dir .. "/myvenv/bin/python") or vim.fn.exepath("python3")
+
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			-- setup the lua language server
@@ -31,6 +40,12 @@ return {
 
 			lspconfig.pyright.setup({
 				capabilities = capabilities,
+				root_dir = root_dir,
+				settings = {
+					python = {
+						pythonPath = python_path,
+					},
+				},
 			})
 
 			-- Set vim motion for <Space> + c + h to show code documentation about the code the cursor is currently over if available

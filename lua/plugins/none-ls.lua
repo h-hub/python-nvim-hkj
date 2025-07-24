@@ -22,6 +22,14 @@ return {
 
 		local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 
+		local util = require("lspconfig.util")
+
+		-- Detect project root
+		local root_dir = util.root_pattern("pyproject.toml", "setup.py", "requirements.txt", ".git")(vim.fn.getcwd())
+
+		-- Construct path to mypy inside venv
+		local mypy_path = root_dir and (root_dir .. "/myvenv/bin/mypy") or "mypy"
+
 		-- run the setup function for none-ls to setup our different formatters
 		null_ls.setup({
 
@@ -30,8 +38,13 @@ return {
 				null_ls.builtins.formatting.black,
 				null_ls.builtins.formatting.isort,
 
-				require("none-ls.diagnostics.flake8"),
-				null_ls.builtins.diagnostics.mypy,
+				-- require("none-ls.diagnostics.flake8"),
+				-- null_ls.builtins.diagnostics.mypy,
+
+				null_ls.builtins.diagnostics.mypy.with({
+					command = mypy_path,
+					extra_args = { "--ignore-missing-imports" },
+				}),
 			},
 			-- Format on save
 			on_attach = function(client, bufnr)
